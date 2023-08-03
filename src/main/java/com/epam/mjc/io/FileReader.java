@@ -43,21 +43,5 @@ public class FileReader {
         }
         return new Profile(name, age, email, phone);
     }
-
-    private int parseInt(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } return 0;
-    }
-
-    private long parseLong(String value) {
-        try {
-            return Long.parseLong(value);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } return 0;
-    }
 }
 
