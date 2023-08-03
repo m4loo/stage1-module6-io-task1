@@ -21,16 +21,16 @@ public class FileReader {
                 String value = parts[1];
                 if (parts.length ==2) {
                     switch (key) {
-                        case "Name" -> name = value;
-                        case "Age" -> {
+                        case "Name": name = value;
+                        case "Age": {
                             try {
                                 age = Integer.parseInt(value);
                             } catch (NumberFormatException e) {
                                 e.printStackTrace();
                             }
                         }
-                        case "Email" -> email = value;
-                        case "Phone" -> {
+                        case "Email": email = value;
+                        case "Phone": {
                             try {
                                 phone = Long.parseLong(value);
                             } catch (NumberFormatException e) {
