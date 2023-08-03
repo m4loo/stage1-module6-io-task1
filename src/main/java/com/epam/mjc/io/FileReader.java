@@ -12,9 +12,7 @@ public class FileReader {
         String email = null;
         long phone = 0;
 
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split(": ");
@@ -26,21 +24,15 @@ public class FileReader {
                             name = value;
                             break;
                         case "Age":
-                            try {
-                                age = Integer.parseInt(value);
-                            } catch (NumberFormatException e) {
-                                e.printStackTrace();
-                            }
+                            age = Integer.parseInt(value);
                             break;
                         case "Email":
                             email = value;
                             break;
                         case "Phone":
-                            try {
-                                phone = Long.parseLong(value);
-                            } catch (NumberFormatException e) {
-                                e.printStackTrace();
-                            }
+                            phone = Long.parseLong(value);
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -48,15 +40,24 @@ public class FileReader {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return new Profile(name, age, email, phone);
     }
+
+    private int parseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } return 0;
+    }
+
+    private long parseLong(String value) {
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } return 0;
+    }
 }
+
